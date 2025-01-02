@@ -1,16 +1,15 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common'; // Correct NestJS imports
-import { StudentService } from './student.service'; // Import the StudentService
-import { CreateStudentDto } from './dto/create-student.dto'; // Import Create DTO
-import { UpdateStudentDto } from './dto/update-student.dto'; // Import Update DTO
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { StudentService } from './student.service';
+import { Student } from './student.entity';
 
-@Controller('students') // Base route: /students
+@Controller('students')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
   // Create a new student
   @Post()
-  create(@Body() createStudentDto: CreateStudentDto) {
-    return this.studentService.create(createStudentDto);
+  create(@Body() student: Student) {
+    return this.studentService.create(student);
   }
 
   // Get all students
@@ -19,21 +18,9 @@ export class StudentController {
     return this.studentService.findAll();
   }
 
-  // Get a specific student by ID
+  // Get a single student by ID
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.studentService.findOne(+id); // +id converts string to number
-  }
-
-  // Update a student's details
-  @Put(':id')
-  update(@Param('id') id: string, @Body() updateStudentDto: UpdateStudentDto) {
-    return this.studentService.update(+id, updateStudentDto); // +id converts string to number
-  }
-
-  // Delete a student by ID
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.studentService.remove(+id); // +id converts string to number
+  findOne(@Param('id') id: string) { // Change to string to avoid errors with type casting
+    return this.studentService.findOne(Number(id)); // Convert id to number in the service
   }
 }

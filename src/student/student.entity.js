@@ -31,8 +31,7 @@ var Student = /** @class */ (function () {
         __metadata("design:type", String)
     ], Student.prototype, "email", void 0);
     __decorate([
-        (0, typeorm_1.Column)({ type: 'date' }) // Specify date type for proper handling
-        ,
+        (0, typeorm_1.Column)(),
         __metadata("design:type", Date)
     ], Student.prototype, "enrollmentDate", void 0);
     __decorate([

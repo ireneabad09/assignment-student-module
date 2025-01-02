@@ -18,14 +18,14 @@ var AppModule = /** @class */ (function () {
         (0, common_1.Module)({
             imports: [
                 typeorm_1.TypeOrmModule.forRoot({
-                    type: 'mysql', // Change to your database type (e.g., 'postgres')
+                    type: 'mysql',
                     host: 'localhost',
-                    port: 3306, // Default port for MySQL
-                    username: 'your_username', // Replace with your DB username
-                    password: 'your_password', // Replace with your DB password
-                    database: 'student_db', // Replace with your database name
-                    entities: [student_entity_1.Student],
-                    synchronize: true, // Auto-create tables; set to false in production
+                    port: 3306,
+                    username: 'root',
+                    password: '1234', // Use your actual MySQL password
+                    database: 'student_db',
+                    entities: [student_entity_1.Student], // Ensure this is here
+                    synchronize: true, // Set to false in production
                 }),
                 student_module_1.StudentModule,
             ],

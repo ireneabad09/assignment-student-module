@@ -13,39 +13,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentController = void 0;
-var common_1 = require("@nestjs/common"); // Correct NestJS imports
-var student_service_1 = require("./student.service"); // Import the StudentService
-var create_student_dto_1 = require("./dto/create-student.dto"); // Import Create DTO
-var update_student_dto_1 = require("./dto/update-student.dto"); // Import Update DTO
+var common_1 = require("@nestjs/common");
+var student_service_1 = require("./student.service");
+var student_entity_1 = require("./student.entity");
 var StudentController = /** @class */ (function () {
     function StudentController(studentService) {
         this.studentService = studentService;
     }
-    // Create a new student
-    StudentController.prototype.create = function (createStudentDto) {
-        return this.studentService.create(createStudentDto);
+    StudentController.prototype.create = function (student) {
+        return this.studentService.create(student);
     };
-    // Get all students
     StudentController.prototype.findAll = function () {
         return this.studentService.findAll();
     };
-    // Get a specific student by ID
     StudentController.prototype.findOne = function (id) {
-        return this.studentService.findOne(+id); // +id converts string to number
-    };
-    // Update a student's details
-    StudentController.prototype.update = function (id, updateStudentDto) {
-        return this.studentService.update(+id, updateStudentDto); // +id converts string to number
-    };
-    // Delete a student by ID
-    StudentController.prototype.remove = function (id) {
-        return this.studentService.remove(+id); // +id converts string to number
+        return this.studentService.findOne(id);
     };
     __decorate([
         (0, common_1.Post)(),
         __param(0, (0, common_1.Body)()),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [create_student_dto_1.CreateStudentDto]),
+        __metadata("design:paramtypes", [student_entity_1.Student]),
         __metadata("design:returntype", void 0)
     ], StudentController.prototype, "create", null);
     __decorate([
@@ -58,27 +46,11 @@ var StudentController = /** @class */ (function () {
         (0, common_1.Get)(':id'),
         __param(0, (0, common_1.Param)('id')),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
+        __metadata("design:paramtypes", [Number]),
         __metadata("design:returntype", void 0)
     ], StudentController.prototype, "findOne", null);
-    __decorate([
-        (0, common_1.Put)(':id'),
-        __param(0, (0, common_1.Param)('id')),
-        __param(1, (0, common_1.Body)()),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String, update_student_dto_1.UpdateStudentDto]),
-        __metadata("design:returntype", void 0)
-    ], StudentController.prototype, "update", null);
-    __decorate([
-        (0, common_1.Delete)(':id'),
-        __param(0, (0, common_1.Param)('id')),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", void 0)
-    ], StudentController.prototype, "remove", null);
     StudentController = __decorate([
-        (0, common_1.Controller)('students') // Base route: /students
-        ,
+        (0, common_1.Controller)('students'),
         __metadata("design:paramtypes", [student_service_1.StudentService])
     ], StudentController);
     return StudentController;

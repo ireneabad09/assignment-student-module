@@ -1,26 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Assignment } from './assignment.entity';  // Import from the same directory
 
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  firstName: string;
+  @Column({ nullable: true })  // Marked as nullable
+  firstName?: string;
 
-  @Column()
-  lastName: string;
+  @Column({ nullable: true })  // Marked as nullable
+  lastName?: string;
 
-  @Column({ unique: true })
-  email: string;
+  @Column({ unique: true, nullable: true })  // Marked as nullable and unique
+  email?: string;
 
-  @Column({ type: 'date' }) // Specify date type for proper handling
-  enrollmentDate: Date;
+  @Column({ nullable: true })  // Marked as nullable
+  enrollmentDate?: Date;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
+
+  @OneToMany(() => Assignment, (assignment) => assignment.student)
+  assignments: Assignment[];
 }

@@ -1,49 +1,69 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Student } from './student.entity';
-import { CreateStudentDto } from './dto/create-student.dto';
-import { UpdateStudentDto } from './dto/update-student.dto';
+import { Assignment } from './assignment.entity'; // Import the Assignment entity
 
 @Injectable()
 export class StudentService {
   constructor(
     @InjectRepository(Student)
     private readonly studentRepository: Repository<Student>,
+    @InjectRepository(Assignment)
+    private readonly assignmentRepository: Repository<Assignment>, // Add the Assignment repository here
   ) {}
 
-  // Create a new student
-  async create(createStudentDto: CreateStudentDto): Promise<Student> {
-    const student = this.studentRepository.create(createStudentDto);
+  async create(student: Student) {
+    // Check if the email already exists
+    const existingStudent = await this.studentRepository.findOne({
+      where: { email: student.email },
+    });
+    if (existingStudent) {
+      throw new ConflictException('Email already exists');
+    }
+
+    // If no duplicate email, save the student
     return this.studentRepository.save(student);
   }
 
-  // Get all students
-  findAll(): Promise<Student[]> {
-    return this.studentRepository.find();
+  findAll() {
+    return this.studentRepository.find({
+      order: { id: 'ASC' }, // or 'DESC' for descending order
+    });
+  }
+  
+  findOne(id: number) {
+    return this.studentRepository.findOne({
+      where: { id },
+      relations: ['assignments'], // Ensure to load assignments as well
+    });
   }
 
-  // Get a specific student by ID
-  findOne(id: number): Promise<Student> {
-    return this.studentRepository.findOne({ where: { id } });
-  }
-
-  // Update a student's details
-  async update(id: number, updateStudentDto: UpdateStudentDto): Promise<Student> {
-    const student = await this.findOne(id);
+  async createAssignmentForStudent(studentId: number, assignmentData: any) {
+    // Fetch the student by ID
+    const student = await this.studentRepository.findOne({
+      where: { id: studentId },
+    });
+  
     if (!student) {
-      throw new Error(`Student with ID ${id} not found`);
+      throw new Error('Student not found');
     }
-    await this.studentRepository.update(id, updateStudentDto);
-    return this.findOne(id);
-  }
+  
+    // Create a single assignment, ensure assignmentData is a single object, not an array
+    const assignment = this.assignmentRepository.create(assignmentData);
+    
+    // Log the assignment before saving
+    console.log('Assignment created:', assignment);
+    console.log('Assignment Data:', assignmentData);
 
-  // Delete a student by ID
-  async remove(id: number): Promise<void> {
-    const student = await this.findOne(id);
-    if (!student) {
-      throw new Error(`Student with ID ${id} not found`);
+    // If assignment is an array, just use the first element
+    if (Array.isArray(assignment)) {
+      console.error('Unexpected array of assignments');
+      return;
     }
-    await this.studentRepository.remove(student);
+  
+  
+    // Save the assignment
+    return await this.assignmentRepository.save(assignment);
   }
-}
+}  

@@ -9,15 +9,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentModule = void 0;
 var common_1 = require("@nestjs/common");
 var typeorm_1 = require("@nestjs/typeorm");
-var student_service_1 = require("./student.service");
 var student_controller_1 = require("./student.controller");
+var student_service_1 = require("./student.service");
 var student_entity_1 = require("./student.entity");
 var StudentModule = /** @class */ (function () {
     function StudentModule() {
     }
     StudentModule = __decorate([
         (0, common_1.Module)({
-            imports: [typeorm_1.TypeOrmModule.forFeature([student_entity_1.Student])], // Register the Student entity
+            imports: [typeorm_1.TypeOrmModule.forFeature([student_entity_1.Student])],
             controllers: [student_controller_1.StudentController],
             providers: [student_service_1.StudentService],
         })
