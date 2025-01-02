@@ -6,24 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StudentModule = void 0;
+exports.AssignmentModule = void 0;
 var common_1 = require("@nestjs/common");
 var typeorm_1 = require("@nestjs/typeorm");
-var student_service_1 = require("./student.service");
-var student_controller_1 = require("./student.controller");
-var assignment_controller_1 = require("./assignment.controller");
-var student_entity_1 = require("./student.entity");
 var assignment_entity_1 = require("./assignment.entity");
-var StudentModule = /** @class */ (function () {
-    function StudentModule() {
+var AssignmentModule = /** @class */ (function () {
+    function AssignmentModule() {
     }
-    StudentModule = __decorate([
+    AssignmentModule = __decorate([
         (0, common_1.Module)({
-            imports: [typeorm_1.TypeOrmModule.forFeature([student_entity_1.Student, assignment_entity_1.Assignment])],
-            controllers: [student_controller_1.StudentController, assignment_controller_1.AssignmentController],
-            providers: [student_service_1.StudentService],
+            imports: [typeorm_1.TypeOrmModule.forFeature([assignment_entity_1.Assignment])],
+            controllers: [], // Add controllers if needed
+            providers: [], // Add services if needed
+            exports: [typeorm_1.TypeOrmModule],
         })
-    ], StudentModule);
-    return StudentModule;
+    ], AssignmentModule);
+    return AssignmentModule;
 }());
-exports.StudentModule = StudentModule;
+exports.AssignmentModule = AssignmentModule;

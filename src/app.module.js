@@ -11,6 +11,7 @@ var common_1 = require("@nestjs/common");
 var typeorm_1 = require("@nestjs/typeorm");
 var student_module_1 = require("./student/student.module");
 var student_entity_1 = require("./student/student.entity");
+var assignment_entity_1 = require("./student/assignment.entity");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -18,14 +19,14 @@ var AppModule = /** @class */ (function () {
         (0, common_1.Module)({
             imports: [
                 typeorm_1.TypeOrmModule.forRoot({
-                    type: 'mysql', // Change to your database type (e.g., 'postgres')
+                    type: 'mysql',
                     host: 'localhost',
-                    port: 3306, // Default port for MySQL
-                    username: 'your_username', // Replace with your DB username
-                    password: 'your_password', // Replace with your DB password
+                    port: 3306,
+                    username: 'your_username', // Replace with actual username
+                    password: 'your_password', // Replace with actual password
                     database: 'student_db', // Replace with your database name
-                    entities: [student_entity_1.Student],
-                    synchronize: true, // Auto-create tables; set to false in production
+                    entities: [student_entity_1.Student, assignment_entity_1.Assignment], // Register both entities here
+                    synchronize: true, // Change to false in production
                 }),
                 student_module_1.StudentModule,
             ],

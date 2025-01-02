@@ -1,0 +1,30 @@
+[33mcommit 5562f83a574fc50bcc616c08f0d2f078277fdfeb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mupdate-students[m[33m, [m[1;31morigin/update-students[m[33m)[m
+Author: ireneabad09 <ic.mairenejoy.abad@cvsu.edu.ph>
+Date:   Thu Jan 2 15:55:57 2025 +0800
+
+    Added update operation for students
+
+[33mcommit 8f1e2a3b556f3d69c49b7796173cda8fa5f49715[m[33m ([m[1;31morigin/read-students[m[33m, [m[1;32mread-students[m[33m)[m
+Author: ireneabad09 <ic.mairenejoy.abad@cvsu.edu.ph>
+Date:   Thu Jan 2 15:51:31 2025 +0800
+
+    Added read operation for students
+
+[33mcommit 8162ba62d958ac17046aa41b3c0213e635aca409[m
+Merge: 3b8d452 5bcab7b
+Author: ireneabad09 <ic.mairenejoy.abad@cvsu.edu.ph>
+Date:   Thu Jan 2 15:41:34 2025 +0800
+
+    Resolved merge conflict in README.md
+
+[33mcommit 3b8d4526b1e632f2a04e4d885124169beb84a434[m
+Author: ireneabad09 <ic.mairenejoy.abad@cvsu.edu.ph>
+Date:   Thu Jan 2 15:18:06 2025 +0800
+
+    Added create operation for students
+
+[33mcommit 5bcab7b1d0f0372f8e9bfea3bff29144fea1dad0[m
+Author: Ma. Irene Joy B. Abad <105908088+ireneabad09@users.noreply.github.com>
+Date:   Thu Jan 2 14:39:26 2025 +0800
+
+    Initial commit

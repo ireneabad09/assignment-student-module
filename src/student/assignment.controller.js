@@ -1,5 +1,4 @@
 "use strict";
-// student.service.ts
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49,40 +48,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StudentService = void 0;
+exports.AssignmentController = void 0;
 var common_1 = require("@nestjs/common");
-var typeorm_1 = require("@nestjs/typeorm");
-var typeorm_2 = require("typeorm");
-var student_entity_1 = require("./student.entity");
-var StudentService = /** @class */ (function () {
-    function StudentService(studentRepository) {
-        this.studentRepository = studentRepository;
+var student_service_1 = require("./student.service");
+var AssignmentController = /** @class */ (function () {
+    function AssignmentController(studentService) {
+        this.studentService = studentService;
     }
-    // Other methods (create, findAll, etc.) go here...
-    StudentService.prototype.update = function (id, updateData) {
+    // Create an assignment for a specific student
+    AssignmentController.prototype.createAssignment = function (studentId, assignmentData) {
         return __awaiter(this, void 0, void 0, function () {
-            var student;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.studentRepository.findOne({ where: { id: id } })];
-                    case 1:
-                        student = _a.sent();
-                        if (!student) {
-                            throw new common_1.NotFoundException('Student not found');
-                        }
-                        // Update student fields
-                        Object.assign(student, updateData);
-                        // Save the updated student to the database
-                        return [2 /*return*/, this.studentRepository.save(student)];
-                }
+                return [2 /*return*/];
             });
         });
     };
-    StudentService = __decorate([
-        (0, common_1.Injectable)(),
-        __param(0, (0, typeorm_1.InjectRepository)(student_entity_1.Student)),
-        __metadata("design:paramtypes", [typeorm_2.Repository])
-    ], StudentService);
-    return StudentService;
+    __decorate([
+        (0, common_1.Post)(':studentId'),
+        __param(0, (0, common_1.Param)('studentId')),
+        __param(1, (0, common_1.Body)()),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Number, Object]),
+        __metadata("design:returntype", Promise)
+    ], AssignmentController.prototype, "createAssignment", null);
+    AssignmentController = __decorate([
+        (0, common_1.Controller)('assignments'),
+        __metadata("design:paramtypes", [student_service_1.StudentService])
+    ], AssignmentController);
+    return AssignmentController;
 }());
-exports.StudentService = StudentService;
+exports.AssignmentController = AssignmentController;

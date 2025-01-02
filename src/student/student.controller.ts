@@ -1,7 +1,20 @@
-@Patch(':id')
-async update(
-  @Param('id') id: number,
-  @Body() updateStudentDto: UpdateStudentDto,
-): Promise<Student> {
-  return this.studentService.update(id, updateStudentDto);
+// student.controller.ts
+
+import { Controller, Put, Param, Body } from '@nestjs/common';
+import { StudentService } from './student.service';
+import { Student } from './student.entity';
+
+@Controller('students')
+export class StudentController {
+  constructor(private readonly studentService: StudentService) {}
+
+  // Other routes (GET, POST, etc.) go here...
+
+  @Put(':id')
+  async updateStudent(
+    @Param('id') id: number, 
+    @Body() updateData: Partial<Student>,
+  ) {
+    return this.studentService.update(id, updateData);
+  }
 }

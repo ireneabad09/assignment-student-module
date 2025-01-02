@@ -9,39 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Student = void 0;
+exports.Assignment = void 0;
 var typeorm_1 = require("typeorm");
-var assignment_entity_1 = require("./assignment.entity");
-var Student = /** @class */ (function () {
-    function Student() {
+var student_entity_1 = require("./student.entity");
+var Assignment = /** @class */ (function () {
+    function Assignment() {
     }
     __decorate([
         (0, typeorm_1.PrimaryGeneratedColumn)(),
         __metadata("design:type", Number)
-    ], Student.prototype, "id", void 0);
+    ], Assignment.prototype, "id", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", String)
-    ], Student.prototype, "firstName", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], Student.prototype, "lastName", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], Student.prototype, "email", void 0);
+    ], Assignment.prototype, "title", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", Date)
-    ], Student.prototype, "enrollmentDate", void 0);
+    ], Assignment.prototype, "dueDate", void 0);
     __decorate([
-        (0, typeorm_1.OneToMany)(function () { return assignment_entity_1.Assignment; }, function (assignment) { return assignment.student; }),
-        __metadata("design:type", Array)
-    ], Student.prototype, "assignments", void 0);
-    Student = __decorate([
+        (0, typeorm_1.ManyToOne)(function () { return student_entity_1.Student; }, function (student) { return student.assignments; }, { onDelete: 'CASCADE' }),
+        __metadata("design:type", student_entity_1.Student)
+    ], Assignment.prototype, "student", void 0);
+    Assignment = __decorate([
         (0, typeorm_1.Entity)()
-    ], Student);
-    return Student;
+    ], Assignment);
+    return Assignment;
 }());
-exports.Student = Student;
+exports.Assignment = Assignment;

@@ -3,6 +3,13 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "target": "ES2020",         // Use a modern JavaScript target
+    "module": "CommonJS",       // CommonJS module system for Node.js
+    "moduleResolution": "node", // Resolve modules like Node.js
+    "outDir": "./dist",         // Output compiled files to the 'dist' directory
+    "rootDir": "./src"          // Root directory for TypeScript files
+  },
+  "include": ["src/**/*.ts"],  // Include all TypeScript files in the 'src' folder
+  "exclude": ["node_modules"]  // Exclude the 'node_modules' folder
 }

@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Assignment } from './assignment.entity';
 
 @Entity()
 export class Student {
@@ -12,15 +12,12 @@ export class Student {
   @Column()
   lastName: string;
 
-  @Column({ unique: true })
+  @Column()
   email: string;
 
-  @Column({ type: 'date' }) // Specify date type for proper handling
+  @Column()
   enrollmentDate: Date;
 
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @OneToMany(() => Assignment, (assignment) => assignment.student)
+  assignments: Assignment[];
 }
