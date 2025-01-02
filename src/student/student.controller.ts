@@ -1,7 +1,4 @@
-@Patch(':id')
-async update(
-  @Param('id') id: number,
-  @Body() updateStudentDto: UpdateStudentDto,
-): Promise<Student> {
-  return this.studentService.update(id, updateStudentDto);
+@Delete(':id')
+async remove(@Param('id') id: number): Promise<void> {
+  return this.studentService.remove(id);
 }
