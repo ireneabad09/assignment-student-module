@@ -1,11 +1,4 @@
-@Injectable()
-export class StudentService {
-  constructor(
-    @InjectRepository(Student)
-    private studentRepository: Repository<Student>,
-  ) {}
-
-  async findAll(): Promise<Student[]> {
-    return this.studentRepository.find();
-  }
+async update(id: number, updateStudentDto: UpdateStudentDto): Promise<Student> {
+  await this.studentRepository.update(id, updateStudentDto);
+  return this.studentRepository.findOne(id);
 }
